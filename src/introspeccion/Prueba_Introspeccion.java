@@ -34,11 +34,11 @@ public class Prueba_Introspeccion {
 			imprimirConstructores(cl);
 			System.out.println();
 
-			//imprimirMetodos(cl);
+			imprimirMetodos(cl);
 
 			System.out.println();
 
-			//imprimirCampos(cl);
+			imprimirCampos(cl);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
@@ -46,7 +46,9 @@ public class Prueba_Introspeccion {
 		}
 	}
 
-	// metodos
+	/**
+	 * ver los constructores
+	 */
 	public static void imprimirConstructores(Class cl) {
 
 		Constructor[] constructores = cl.getDeclaredConstructors();
@@ -69,6 +71,50 @@ public class Prueba_Introspeccion {
 
 			// cerrar el parentesis del constructor
 			System.out.print(");");
+		}
+	}
+
+	/**
+	 * todos los metodos de la clase
+	 */
+	public static void imprimirMetodos(Class cl) {
+		Method[] metodos = cl.getDeclaredMethods();
+
+		for (Method m : metodos) {
+			Class tipo = m.getReturnType();
+
+			String nombre = m.getName();
+
+			// imprimir modificadores, tipo y nombre
+			System.out.print(" " + Modifier.toString(m.getModifiers()));
+			System.out.print(" " + tipo.getName() + " " + nombre + "(");
+
+			// imprime tipo de parametros
+			Class[] tipo_params = m.getParameterTypes();
+
+			for (int i = 0; i < tipo_params.length; i++) {
+				if (i > 0) {
+					System.out.print(", ");
+				}
+
+				System.out.print(tipo_params[i].getName());
+			}
+			System.out.println(");");
+		}
+	}
+
+	/**
+	 * todos los campos
+	 */
+	public static void imprimirCampos(Class cl) {
+		Field[] campos = cl.getDeclaredFields();
+
+		for (Field f : campos) {
+			Class tipo_campo = f.getType();
+			String nombre = f.getName();
+
+			System.out.print(" " + Modifier.toString(f.getModifiers()));
+			System.out.println(" " + tipo_campo.getName() + " " + nombre + ";");
 		}
 	}
 }
