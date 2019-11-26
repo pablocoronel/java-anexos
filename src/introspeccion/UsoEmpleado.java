@@ -15,12 +15,28 @@ public class UsoEmpleado {
 		// devuelve class paquete.Clase
 //		System.out.println(Antonio.getClass());
 
-		Class cl_1 = Antonio.getClass();
-		System.out.println(cl_1.getName()); // nombre de la clase
+		// Class cl_1 = Antonio.getClass();
+		// System.out.println(cl_1.getName()); // nombre de la clase
 
-		String nombre_clase = "introspeccion.Empleado";
+		/**
+		 * la clase puede cambiar en tiempo de ejecucion, esto es simulado harcodeando
+		 * el nombre
+		 */
+
+		Class cl_2;
+		String nombre_clase = "introspeccion.Persona";
 		try {
-			Class cl_2 = Class.forName(nombre_clase);
+			cl_2 = Class.forName(nombre_clase);
+
+			System.out.println(cl_2.getName());
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		nombre_clase = "introspeccion.Empleado";
+		try {
+			cl_2 = Class.forName(nombre_clase);
 
 			System.out.println(cl_2.getName());
 		} catch (ClassNotFoundException e) {
